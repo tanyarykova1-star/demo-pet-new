@@ -1,0 +1,321 @@
+/* src/App.css */
+.app-container {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  transition: all 0.5s ease;
+  position: relative; /* Для позиционирования кнопки языка */
+  box-sizing: border-box;
+}
+
+/* Кнопка переключения языка */
+.lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  color: #e50914;
+  border: 2px solid #e50914;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.lang-toggle:hover {
+  background: #e50914;
+  color: #000;
+}
+
+/* Обертка для 3D-сцены */
+.scene-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Стили для самого Canvas (внутри DemogorgonScene) */
+.scene-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: background 1s;
+}
+
+/* ... Твои старые стили (game-over, glitch, h1, stats, bar-bg и т.д.) остаются без изменений ... */
+h1 {
+  color: #e50914;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+  margin-top: 40px; /* Отступ сверху, чтобы не наезжало на кнопку языка */
+}
+
+.game-over {
+  animation: screenShake 0.5s infinite;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+@keyframes screenShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.glitch {
+  color: #e50914;
+  text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff;
+  animation: glitch-anim 0.3s infinite;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.stats { margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; }
+.stat-bar { text-align: left; }
+.bar-bg { width: 100%; height: 15px; background-color: #333; border-radius: 10px; overflow: hidden; margin-top: 5px; }
+.bar-fill { height: 100%; transition: width 0.3s ease; }
+.hunger { background-color: #e50914; }
+.energy { background-color: #1e90ff; }
+.controls { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
+
+.btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  font-weight: bold;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn:active { transform: scale(0.95); }
+.btn.feed { background-color: #e50914; color: white; }
+.btn.sleep { background-color: #1e90ff; color: white; }
+.btn.restart { background-color: #fff; color: #000; margin-top: 20px;}
+
+.dead-screen {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  border-radius: 15px;
+  border: 2px solid #e50914;
+  box-shadow: 0 0 50px rgba(229, 9, 20, 0.5);
+  padding: 20px;
+}
+
+.sleepy-mode {
+  filter: saturate(0.6) hue-rotate(20deg);
+  transition: filter 2s ease;
+}
+
+.zzz {
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  font-size: 40px;
+  font-weight: bold;
+  color: #88bbff;
+  text-shadow: 0 0 10px #88bbff;
+  animation: floatZzz 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes floatZzz {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+}
+
+/* 📱 АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-top: 50px;
+  }
+
+  .scene-wrapper {
+    height: 350px; /* Уменьшаем высоту сцены на телефоне */
+  }
+
+  .controls {
+    flex-direction: column; /* Кнопки встают друг под друга */
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%; /* Кнопки на всю ширину */
+    padding: 15px;
+  }
+
+  .dead-screen {
+    height: 350px;
+  }
+  
+  .lang-toggle {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* --- ГЛОБАЛЬНЫЙ ФОН --- */
+body {
+  background-color: #050505;
+  background-image: 
+    radial-gradient(circle at 50% 50%, #1a0000 0%, #000 100%);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Эффект красной сетки по краям */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: 
+    linear-gradient(transparent 50%, rgba(229, 9, 20, 0.05) 50%),
+    linear-gradient(90deg, transparent 50%, rgba(229, 9, 20, 0.05) 50%);
+  background-size: 40px 40px;
+  z-index: -1;
+}
+
+/* Летающие споры (Наизнанку) */
+.spores {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.spore {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: floatSpore linear infinite;
+  bottom: -50px;
+}
+
+@keyframes floatSpore {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(50px) scale(0.5); opacity: 0; }
+}
+
+/* --- ОСТАЛЬНЫЕ СТИЛИ --- */
+.app-container {
+  position: relative;
+  z-index: 1;
+  /* ... остальные стили из прошлого шага (padding, max-width, text-align) ... */
+}
+
+/* Кнопки в шапке */
+.top-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-icon {
+  background: transparent;
+  color: #e50914;
+  border: 2px solid #e50914;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-icon:hover { background: #e50914; color: #000; }
+
+/* Пульсация шкал при низком уровне */
+.bar-fill.critical {
+  animation: pulseRed 1s infinite alternate;
+}
+
+@keyframes pulseRed {
+  from { opacity: 1; box-shadow: 0 0 5px #e50914; }
+  to { opacity: 0.6; box-shadow: 0 0 20px #e50914; }
+}
+
+/* --- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: #111;
+  border: 2px solid #e50914;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.4);
+}
+
+.modal-content h2 {
+  color: #e50914;
+  text-align: center;
+  margin-top: 0;
+}
+
+.modal-content p, .modal-content li {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.modal-content ul {
+  padding-left: 20px;
+}
+
+.modal-content .btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
