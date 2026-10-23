@@ -21,7 +21,7 @@ const translations = {
     restart: "Попробовать снова",
     gameOverHungerTitle: "ОН ПРОСНУЛСЯ",
     gameOverEnergyTitle: "ВЕЧНЫЙ СОН",
-    deadHunger: "Демогоргон ушел в Наизнанку... 💀",
+    deadHunger: "Демогоргон ушел в Изнанку... 💀",
     deadHungerDesc: "Ты не покормил его вовремя.",
     deadEnergy: "Демогоргон впал в спячку... 💤",
     deadEnergyDesc: "Он слишком долго не спал и обессилел.",
